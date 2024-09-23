@@ -1,0 +1,10 @@
+{
+  "name": "travel-buddy-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/travel-buddy-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["travel-buddy"],
+  "// targets": "to see all targets run: nx show project travel-buddy-e2e --web",
+  "targets": {}
+}
