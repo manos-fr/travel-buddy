@@ -11,10 +11,18 @@ import {
 } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 import tw from 'twrnc';
+import { useGetUsersQuery } from '../graphql/__generated__/graphql';
+import { useGraphQlClient } from '../hooks/useGraphQlClient';
 
-export const App = () => {
+export const Home = () => {
   const [whatsNextYCoord, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
+
+  const { data } = useGetUsersQuery({
+    client: useGraphQlClient(),
+  });
+
+  console.log({ data });
 
   return (
     <>
@@ -734,4 +742,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
