@@ -2,6 +2,7 @@
   "expo": {
     "name": "TravelBuddy",
     "slug": "travel-buddy",
+    "scheme": "travel-buddy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
