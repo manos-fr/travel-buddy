@@ -19,7 +19,7 @@ export const Home = () => {
             The best users are:
           </Text>
           <Text style={tw`text-xl text-center`}>
-            {data?.users && data.users.length > 0
+            {data?.users?.length
               ? data.users.map((user) => user.name).join(', ')
               : 'None found'}
           </Text>
