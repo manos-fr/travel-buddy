@@ -16,13 +16,15 @@ Install packages
 - Clone this repo
 
 - Install Hasura with the command: </br>
-  `curl -L <https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh> | bash`
+  `curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash`
 
 - `npm install`
 
 ## Firing it up :fire:
 
 In a tiled terminal or similar run in separate terminals:
+
+First, open your [Docker Desktop](https://www.docker.com/products/docker-desktop/) app, then:
 
 - `npm run infra` will run all services
 - `npm run hasura`
