@@ -1,0 +1,13 @@
+table:
+  name: network
+  schema: public
+object_relationships:
+  - name: network_as_action_user
+    using:
+      foreign_key_constraint_on: action_user_id
+  - name: network_as_user_1
+    using:
+      foreign_key_constraint_on: user_id_1
+  - name: network_as_user_2
+    using:
+      foreign_key_constraint_on: user_id_2
