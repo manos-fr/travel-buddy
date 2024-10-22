@@ -3,7 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Slot } from 'expo-router';
 import { useDeviceContext } from 'twrnc';
 import tw from 'twrnc';
-import BottomNavbar from '../../components/Navigation/BottomNavBar';
+import BottomNavbar from '../../components/navigation/BottomNavBar';
 
 export default function AppLayout() {
   useDeviceContext(tw);

@@ -8,7 +8,7 @@ interface ActivityFeedProps {
   activities: ActivityItem[];
 }
 
-const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
+const ActivityFeed = ({ activities }: ActivityFeedProps) => {
   const renderItem = ({ item }: { item: ActivityItem }) => (
     <View style={tw`flex-row border-t border-gray-300 py-4 mb-3`}>
       <Avatar source={item.avatarUrl} size={10} />
@@ -28,6 +28,7 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
+      horizontal={false}
     />
   );
 };

@@ -7,7 +7,7 @@ interface AvatarProps {
   onPress?: () => void;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ source, size = 10, onPress }) => {
+const Avatar = ({ source, size = 10, onPress }: AvatarProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View

@@ -7,7 +7,7 @@ interface NearbyPlacesProps {
   places: Place[];
 }
 
-const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ places }) => {
+const NearbyPlaces = ({ places }: NearbyPlacesProps) => {
   const renderItem = ({ item }: { item: Place }) => (
     <TouchableOpacity
       style={tw`rounded-2xl border border-gray-300 p-4 mr-4 w-40 bg-white dark:bg-gray-700`}
