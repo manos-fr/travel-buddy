@@ -9,9 +9,13 @@
     "react-native": "*",
     "expo": "*",
     "react-native-svg": "*",
-    "react-native-web": "*"
+    "react-native-web": "*",
+    "react-native-safe-area-context": "*",
+    "react": "*"
   },
   "scripts": {
-    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/travel-buddy"
+    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/travel-buddy",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   }
 }
