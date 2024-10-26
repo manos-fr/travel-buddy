@@ -72,15 +72,16 @@ module.exports = {
           800: '#854d0e',
           900: '#713f12',
         },
-      }
+      },
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/container-queries')],
-  "tailwindCSS.classAttributes": [
-    "style"
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries'),
   ],
-  "tailwindCSS.experimental.classRegex": [
-    "tw`([^`]*)",
-    ["tw.style\\(([^)]*)\\)", "'([^']*)'"]
-  ]
+  'tailwindCSS.classAttributes': ['style'],
+  'tailwindCSS.experimental.classRegex': [
+    'tw`([^`]*)',
+    ['tw.style\\(([^)]*)\\)', "'([^']*)'"],
+  ],
 };
