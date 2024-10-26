@@ -29,6 +29,7 @@ const ActivityFeed = ({ activities }: ActivityFeedProps) => {
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
       horizontal={false}
+      scrollEnabled={false}
     />
   );
 };

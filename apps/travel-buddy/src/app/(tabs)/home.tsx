@@ -6,14 +6,21 @@ import NearbyPlaces from '../../components/home/NearbyPlaces';
 import { recentActivity, savedPlaces } from '../../constants/dummyData';
 import tw from 'twrnc';
 import Avatar from '../../components/common/Avatar';
+import { useRouter } from 'expo-router';
+
 const Home = () => {
+  const router = useRouter();
   const handleAvatarPress = () => {
-    //go to profile or go to settings
+    router.push('/profile');
   };
 
   return (
-    <SafeAreaView style={tw`flex-1`}>
-      <ScrollView showsVerticalScrollIndicator style={tw`flex-1 px-4`}>
+    <SafeAreaView style={tw`flex-1 bg-white dark:bg-black`}>
+      <ScrollView
+        showsVerticalScrollIndicator
+        style={tw`flex-1 px-4`}
+        contentContainerStyle={{ paddingBottom: 80 }}
+      >
         <View style={tw`flex-row items-center pt-10 pb-6`}>
           <Avatar
             source="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
