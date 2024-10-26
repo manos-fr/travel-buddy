@@ -1,4 +1,3 @@
-// components/navigation/BackButton.tsx
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
