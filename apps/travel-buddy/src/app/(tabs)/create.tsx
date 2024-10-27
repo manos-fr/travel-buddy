@@ -1,12 +1,15 @@
+// app/create/index.tsx
 import React, { useState } from 'react';
 import { Text, SafeAreaView, ScrollView, View, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
 import { useFocusEffect } from '@react-navigation/native';
-import messages from '../../constants/createListMessages'; 
+import messages from '../../constants/createListMessages';
+import { useRouter } from 'expo-router';
 
 const CreatePage = () => {
   const [randomMessage, setRandomMessage] = useState<string>('');
-  const [selectedOption, setSelectedOption] = useState<string>(''); 
+  const [selectedOption, setSelectedOption] = useState<string>('');
+  const navigation = useRouter();
 
   // Function to select a random message
   const getRandomMessage = (): string => {
@@ -22,11 +25,26 @@ const CreatePage = () => {
     }, [])
   );
 
+  // Select option logic
+  const handleOptionSelect = (option: string) => {
+    setSelectedOption(option);
+  };
+
+  // Handle proceed navigation based on selected option
+  const handleProceed = () => {
+    if (selectedOption === 'List') {
+      navigation.push('create/createList');
+    } else if (selectedOption === 'Place') {
+      navigation.push('create/createPlace'); // Navigate to CreatePlace
+    } else {
+      console.log("Please select an option.");
+    }
+  };
+
   return (
     <SafeAreaView style={tw`flex-1 bg-black`}>
       <ScrollView contentContainerStyle={[tw`flex-1`, { paddingBottom: 80 }]}>
         <View style={tw`flex-1 justify-center items-center`}>
-          
           <Text style={tw`text-white font-semibold text-lg text-center mb-6`}>
             {randomMessage}
           </Text>
@@ -35,7 +53,7 @@ const CreatePage = () => {
           <View style={tw`flex-row items-center mb-6`}>
             {/* List Option */}
             <TouchableOpacity
-              style={[
+              style={[ 
                 tw`flex-1 py-3 items-center justify-center rounded-l-full`,
                 {
                   backgroundColor: selectedOption === 'List' ? 'linear-gradient(90deg, #0D74F4, #0DFFA8)' : 'rgba(255, 255, 255, 0.1)',
@@ -48,14 +66,14 @@ const CreatePage = () => {
                   elevation: 5,
                 },
               ]}
-              onPress={() => setSelectedOption('List')}
+              onPress={() => handleOptionSelect('List')}
             >
               <Text style={tw`text-white font-semibold`}>List</Text>
             </TouchableOpacity>
 
             {/* Place Option */}
             <TouchableOpacity
-              style={[
+              style={[ 
                 tw`flex-1 py-3 items-center justify-center rounded-r-full`,
                 {
                   backgroundColor: selectedOption === 'Place' ? 'linear-gradient(90deg, #0DFFA8, #0D74F4)' : 'rgba(255, 255, 255, 0.1)',
@@ -68,7 +86,7 @@ const CreatePage = () => {
                   elevation: 5,
                 },
               ]}
-              onPress={() => setSelectedOption('Place')}
+              onPress={() => handleOptionSelect('Place')}
             >
               <Text style={tw`text-white font-semibold`}>Place</Text>
             </TouchableOpacity>
@@ -76,8 +94,8 @@ const CreatePage = () => {
 
           {/* Proceed Button */}
           <TouchableOpacity
-            style={[
-              tw`w-3/4  rounded-lg py-4 mb-4 items-center justify-center`,
+            style={[ 
+              tw`w-3/4 rounded-lg py-4 mb-4 items-center justify-center`,
               {
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 4 },
@@ -86,13 +104,7 @@ const CreatePage = () => {
                 elevation: 5,
               }
             ]}
-            onPress={() => {
-              if (selectedOption) {
-                console.log(`Navigate to Add ${selectedOption}`);
-              } else {
-                console.log("Please select an option.");
-              }
-            }}
+            onPress={handleProceed}  // Call handleProceed on press
           >
             <Text style={tw`text-white text-lg font-semibold`}>
               {selectedOption ? `Proceed to Add ${selectedOption}` : 'Select an Option'}
