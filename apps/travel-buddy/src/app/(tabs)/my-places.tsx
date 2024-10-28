@@ -42,13 +42,13 @@ const MyPlaces = () => {
                 {list.Photo ? (
                   <Image 
                     source={{ uri: list.Photo }} 
-                    style={tw`h-85 rounded-m`} 
+                    style={tw`h-85 rounded`} 
                     resizeMode="cover"
                   />
                 ) : (
-                  <View style={tw`h-85 bg-gray-300 rounded-m`} /> // Gray background when no image
+                  <View style={tw`h-85 bg-gray-300 rounded`} /> // Gray background when no image
                 )}
-                <View style={tw`absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2 rounded-m`}>
+                <View style={tw`absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2 `}>
                   <Text style={tw`font-bold text-white`}>{list.Name}</Text>
                   <Text style={tw`text-gray-200`}>{list.Description}</Text>
                 </View>
