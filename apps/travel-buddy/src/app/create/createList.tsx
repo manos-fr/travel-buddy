@@ -4,12 +4,15 @@ import * as ImagePicker from 'expo-image-picker';
 import tw from 'twrnc';
 import { useCreateListMutation } from '../../graphql/__generated__/graphql'; 
 import { useGraphQlClient } from '../../hooks/useGraphQlClient';
+import { useRouter } from 'expo-router';
 
 const CreateList: React.FC = () => {
   const [listName, setListName] = useState<string>('');
   const [listDescription, setListDescription] = useState<string>('');
   const [listImage, setListImage] = useState<string | null>(null);
   const [ownerId, setOwnerId] = useState<number>(1); //Should modify to get current user's id
+
+  const navigation = useRouter();
 
   // Use the useCreateListMutation hook
   const [createListMutation, { loading, error }] = useCreateListMutation({
@@ -34,7 +37,16 @@ const CreateList: React.FC = () => {
 
       if (data?.insert_lists_one) {
         console.log('List created successfully:', data.insert_lists_one);
-        Alert.alert("Success", "List created successfully.");
+        Alert.alert(
+          "Success",
+          "List created successfully.",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.push('/my-places'), // Navigate to MyPlaces on OK press
+            },
+          ]
+        );
         // Clear inputs
         setListName('');
         setListDescription('');

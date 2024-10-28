@@ -1,5 +1,21 @@
 import { gql } from '@apollo/client';
 
+
+export const getLists = gql`
+  query getLists {
+    lists {
+      id
+      Name
+      Description
+      Photo
+      Owner
+      Creation_date
+      Update_date
+    }
+  }
+`;
+
+
 export const CREATE_LIST = gql`
   mutation CreateList($name: String!, $description: String, $photo: String, $owner: Int!) {
     insert_lists_one(object: {

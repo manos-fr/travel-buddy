@@ -4260,6 +4260,11 @@ export type Users_Variance_Fields = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
+export type GetListsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetListsQuery = { __typename?: 'query_root', lists: Array<{ __typename?: 'lists', id: number, Name: string, Description?: string | null, Photo?: string | null, Owner: number, Creation_date: any, Update_date?: any | null }> };
+
 export type CreateListMutationVariables = Exact<{
   name: Scalars['String']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
@@ -4276,6 +4281,51 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', email: string, id: number, name: string }> };
 
 
+export const GetListsDocument = gql`
+    query getLists {
+  lists {
+    id
+    Name
+    Description
+    Photo
+    Owner
+    Creation_date
+    Update_date
+  }
+}
+    `;
+
+/**
+ * __useGetListsQuery__
+ *
+ * To run a query within a React component, call `useGetListsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetListsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetListsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetListsQuery(baseOptions?: Apollo.QueryHookOptions<GetListsQuery, GetListsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetListsQuery, GetListsQueryVariables>(GetListsDocument, options);
+      }
+export function useGetListsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetListsQuery, GetListsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetListsQuery, GetListsQueryVariables>(GetListsDocument, options);
+        }
+export function useGetListsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetListsQuery, GetListsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetListsQuery, GetListsQueryVariables>(GetListsDocument, options);
+        }
+export type GetListsQueryHookResult = ReturnType<typeof useGetListsQuery>;
+export type GetListsLazyQueryHookResult = ReturnType<typeof useGetListsLazyQuery>;
+export type GetListsSuspenseQueryHookResult = ReturnType<typeof useGetListsSuspenseQuery>;
+export type GetListsQueryResult = Apollo.QueryResult<GetListsQuery, GetListsQueryVariables>;
 export const CreateListDocument = gql`
     mutation CreateList($name: String!, $description: String, $photo: String, $owner: Int!) {
   insert_lists_one(
