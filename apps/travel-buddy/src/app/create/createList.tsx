@@ -2,27 +2,53 @@ import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import tw from 'twrnc';
+import { useCreateListMutation } from '../../graphql/__generated__/graphql'; 
+import { useGraphQlClient } from '../../hooks/useGraphQlClient';
 
-const CreateList = () => {
+const CreateList: React.FC = () => {
   const [listName, setListName] = useState<string>('');
   const [listDescription, setListDescription] = useState<string>('');
-  const [listImage, setListImage] = useState<string | null>(null); // State to hold the image URI
+  const [listImage, setListImage] = useState<string | null>(null);
+  const [ownerId, setOwnerId] = useState<number>(1); //Should modify to get current user's id
 
-  // Function to handle list creation logic
-  const handleCreateList = () => {
+  // Use the useCreateListMutation hook
+  const [createListMutation, { loading, error }] = useCreateListMutation({
+    client: useGraphQlClient(),
+  });
+
+  const handleCreateList = async () => {
     if (!listName) {
       Alert.alert("List Name Required", "Please enter a name for your list.");
       return;
     }
-    // Handle list creation logic here
-    Alert.alert("List Created", `Name: ${listName}, Description: ${listDescription}`);
-    // Clear inputs
-    setListName('');
-    setListDescription('');
-    setListImage(null);
+
+    try {
+      const { data } = await createListMutation({
+        variables: {
+          name: listName,
+          description: listDescription || null,
+          photo: listImage || null,
+          owner: ownerId, 
+        },
+      });
+
+      if (data?.insert_lists_one) {
+        console.log('List created successfully:', data.insert_lists_one);
+        Alert.alert("Success", "List created successfully.");
+        // Clear inputs
+        setListName('');
+        setListDescription('');
+        setListImage(null);
+      } else {
+        Alert.alert("Error", "List creation failed.");
+      }
+    } catch (error) {
+      console.error('Mutation error:', error);
+      const errorMessage = (error as Error).message || "An error occurred.";
+      Alert.alert('Failed to create list', errorMessage);
+    }
   };
 
-  // Function to handle image picking
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissionResult.granted) {
@@ -38,7 +64,7 @@ const CreateList = () => {
 
     if (!result.canceled) {
       const successResult = result as ImagePicker.ImagePickerSuccessResult;
-      setListImage(successResult.assets[0].uri); // Set the URI from the assets array
+      setListImage(successResult.assets[0].uri);
     }
   };
 
@@ -48,10 +74,7 @@ const CreateList = () => {
         <View style={tw`flex-1 justify-center items-center`}>
           <Text style={tw`text-black dark:text-white font-bold text-2xl mb-6`}>Create a New List</Text>
 
-          {/* Image and Text Input Section */}
           <View style={tw`flex-row items-start w-full px-4 mb-6`}>
-            
-            {/* Image Upload Section on the left */}
             <TouchableOpacity onPress={pickImage} style={tw`mr-4`}>
               {listImage ? (
                 <Image source={{ uri: listImage }} style={tw`w-32 h-32 rounded-lg`} />
@@ -62,9 +85,7 @@ const CreateList = () => {
               )}
             </TouchableOpacity>
 
-            {/* Text Input Fields on the right */}
             <View style={tw`flex-1 justify-center mt-4`}>
-              {/* List Name Input */}
               <TextInput
                 style={tw`bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-md p-3 mb-4`}
                 placeholder="List Name"
@@ -72,8 +93,6 @@ const CreateList = () => {
                 value={listName}
                 onChangeText={setListName}
               />
-
-              {/* List Description Input */}
               <TextInput
                 style={tw`bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-md p-3`}
                 placeholder="Description (optional)"
@@ -84,13 +103,17 @@ const CreateList = () => {
             </View>
           </View>
 
-          {/* Create List Button */}
           <TouchableOpacity
             style={tw`bg-blue-600 rounded-md p-3 w-3/4`}
             onPress={handleCreateList}
+            disabled={loading} // Disable button when loading
           >
-            <Text style={tw`text-white text-center font-bold`}>Create List</Text>
+            <Text style={tw`text-white text-center font-bold`}>
+              {loading ? 'Creating...' : 'Create List'}
+            </Text>
           </TouchableOpacity>
+
+          {error && <Text style={tw`text-red-500`}>Error: {error.message}</Text>}
         </View>
       </ScrollView>
     </SafeAreaView>
