@@ -1,0 +1,1 @@
+CREATE TABLE "public"."lists" ("id" serial NOT NULL, "Name" text NOT NULL, "Description" text, "Photo" text, "Owner" integer NOT NULL, "Creation_date" timestamptz NOT NULL, "Update_date" timestamptz NOT NULL, PRIMARY KEY ("id") , UNIQUE ("id"));

@@ -1,3 +1,8 @@
 - "!include public_grants.yaml"
+- "!include public_lists.yaml"
+- "!include public_network.yaml"
+- "!include public_places.yaml"
+- "!include public_somes.yaml"
 - "!include public_users.yaml"
 - "!include public_users_grants.yaml"
+- "!include public_users_places.yaml"
