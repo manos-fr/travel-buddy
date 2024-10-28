@@ -5,5 +5,147 @@
   "projectType": "application",
   "tags": [],
   "// targets": "to see all targets run: nx show project travel-buddy --web",
-  "targets": {}
+  "targets": {
+    "start": {
+      "executor": "@nx/expo:start",
+      "dependsOn": ["sync-deps"],
+      "configurations": {},
+      "options": {},
+      "parallelism": true
+    },
+    "serve": {
+      "dependsOn": ["sync-deps"],
+      "options": {
+        "cwd": "apps/travel-buddy",
+        "args": ["--clear"],
+        "command": "expo start --web"
+      },
+      "executor": "nx:run-commands",
+      "configurations": {},
+      "parallelism": true
+    },
+    "run-ios": {
+      "dependsOn": ["sync-deps"],
+      "options": { "cwd": "apps/travel-buddy", "command": "expo run:ios" },
+      "executor": "nx:run-commands",
+      "configurations": {},
+      "parallelism": true
+    },
+    "run-android": {
+      "dependsOn": ["sync-deps"],
+      "options": {
+        "cwd": "apps/travel-buddy",
+        "command": "expo run:android"
+      },
+      "executor": "nx:run-commands",
+      "configurations": {},
+      "parallelism": true
+    },
+    "export": {
+      "options": {
+        "cwd": "apps/travel-buddy",
+        "args": ["--clear"],
+        "command": "expo export"
+      },
+      "cache": true,
+      "dependsOn": ["^export"],
+      "inputs": [
+        "default",
+        "^production",
+        { "externalDependencies": ["expo"] }
+      ],
+      "outputs": ["{workspaceRoot}/apps/travel-buddy/dist"],
+      "executor": "nx:run-commands",
+      "configurations": {},
+      "parallelism": true
+    },
+    "install": {
+      "executor": "@nx/expo:install",
+      "configurations": {},
+      "options": {},
+      "parallelism": true
+    },
+    "prebuild": {
+      "dependsOn": ["sync-deps"],
+      "executor": "@nx/expo:prebuild",
+      "configurations": {},
+      "options": {},
+      "parallelism": true
+    },
+    "build": {
+      "dependsOn": ["sync-deps"],
+      "executor": "@nx/expo:build",
+      "configurations": {},
+      "options": {},
+      "parallelism": true
+    },
+    "submit": {
+      "dependsOn": ["sync-deps"],
+      "options": { "cwd": "apps/travel-buddy", "command": "eas submit" },
+      "executor": "nx:run-commands",
+      "configurations": {},
+      "parallelism": true
+    },
+    "lint": {
+      "cache": true,
+      "options": {
+        "cwd": "apps/travel-buddy",
+        "env": { "ESLINT_USE_FLAT_CONFIG": "true" },
+        "command": "eslint ."
+      },
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/eslint.config.js",
+        "{projectRoot}/eslint.config.js",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        { "externalDependencies": ["eslint"] }
+      ],
+      "outputs": ["{options.outputFile}"],
+      "metadata": {
+        "technologies": ["eslint"],
+        "description": "Runs ESLint on project",
+        "help": {
+          "command": "npx eslint --help",
+          "example": { "options": { "max-warnings": 0 } }
+        }
+      },
+      "executor": "nx:run-commands",
+      "configurations": {},
+      "parallelism": true
+    },
+    "eas-build-post-install": {
+      "executor": "nx:run-script",
+      "options": { "script": "eas-build-post-install" },
+      "metadata": {
+        "scriptContent": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/travel-buddy",
+        "runCommand": "npm run eas-build-post-install"
+      },
+      "configurations": {},
+      "parallelism": true
+    },
+    "android": {
+      "dependsOn": ["sync-deps"],
+      "executor": "nx:run-script",
+      "options": { "script": "android" },
+      "metadata": {
+        "scriptContent": "expo run:android",
+        "runCommand": "npm run android"
+      },
+      "configurations": {},
+      "parallelism": true
+    },
+    "ios": {
+      "dependsOn": ["sync-deps"],
+      "executor": "nx:run-script",
+      "options": { "script": "ios" },
+      "metadata": {
+        "scriptContent": "expo run:ios",
+        "runCommand": "npm run ios"
+      },
+      "configurations": {},
+      "parallelism": true
+    }
+  },
+  "implicitDependencies": []
 }

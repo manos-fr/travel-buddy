@@ -6,7 +6,7 @@
     "start": "npx nx run travel-buddy:start",
     "build": "nx build",
     "lint": "nx lint",
-    "infra": "docker compose -p travel_buddy -f infrastructure/docker-compose.yaml up",
+    "infra": "docker compose -p travel-buddy -f infrastructure/docker-compose.yaml up",
     "hasura": "cd infrastructure/hasura && hasura migrate apply --database-name=default && hasura metadata apply && hasura metadata reload && hasura console --console-port=9697 --admin-secret=jijikos",
     "reset-infra": "docker compose -p travel-buddy -f infrastructure/docker-compose.yaml down -v",
     "update-schema": "cd infrastructure/hasura && hasura migrate apply && hasura metadata apply",
