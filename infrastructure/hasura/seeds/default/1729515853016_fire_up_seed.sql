@@ -1,0 +1,17 @@
+SET check_function_bodies = false;
+INSERT INTO public.users (id, name, email, active, created_at, updated_at, profile_picture, friends_list, oid) VALUES (2, 'Manos', 'mankak94@gmail.com', true, '2024-10-21 12:07:11.244161+00', '2024-10-21 12:07:11.244161+00', NULL, NULL, 'aaaa-1-aaaaa');
+INSERT INTO public.users (id, name, email, active, created_at, updated_at, profile_picture, friends_list, oid) VALUES (4, 'Sakis', 'sakis@gmail.com', true, '2024-10-21 12:07:11.244161+00', '2024-10-21 12:07:11.244161+00', NULL, NULL, 'aaaa-2-aaaaa');
+INSERT INTO public.users (id, name, email, active, created_at, updated_at, profile_picture, friends_list, oid) VALUES (5, 'Makis', 'makis@gmail.com', true, '2024-10-21 12:07:11.244161+00', '2024-10-21 12:07:11.244161+00', NULL, NULL, 'aaaa-3-aaaa2');
+INSERT INTO public.network (id, user_id_1, user_id_2, status, action_user_id, created_at, updated_at) VALUES (5, 2, 4, 'pending', 2, '2024-10-21 12:26:09.873574+00', '2024-10-21 12:26:09.873574+00');
+INSERT INTO public.network (id, user_id_1, user_id_2, status, action_user_id, created_at, updated_at) VALUES (9, 4, 5, 'accepted', 4, '2024-10-21 12:31:37.856093+00', '2024-10-21 12:31:37.856093+00');
+INSERT INTO public.network (id, user_id_1, user_id_2, status, action_user_id, created_at, updated_at) VALUES (10, 2, 5, 'accepted', 2, '2024-10-21 12:31:44.06739+00', '2024-10-21 12:31:44.06739+00');
+INSERT INTO public.places (id, notes, photos, rating, created_at, updated_at, categories, name, area) VALUES (1, 'no comemnt', NULL, 4.5000, '2024-10-21 12:10:09.372419+00', '2024-10-21 12:10:09.372419+00', '["fun", "food"]', 'Restaurant 1', 'Berlin');
+INSERT INTO public.places (id, notes, photos, rating, created_at, updated_at, categories, name, area) VALUES (2, 'no comments', NULL, 4.2000, '2024-10-21 12:10:32.852276+00', '2024-10-21 12:10:32.852276+00', '["music", "fun"]', 'Bar 1', 'New York');
+INSERT INTO public.users_places (id, user_id, place_id, created_at, updated_at) VALUES (1, 2, 1, '2024-10-21 12:10:53.397832+00', '2024-10-21 12:10:53.397832+00');
+INSERT INTO public.users_places (id, user_id, place_id, created_at, updated_at) VALUES (2, 4, 2, '2024-10-21 12:10:59.065568+00', '2024-10-21 12:10:59.065568+00');
+INSERT INTO public.users_places (id, user_id, place_id, created_at, updated_at) VALUES (3, 5, 2, '2024-10-21 12:11:02.724184+00', '2024-10-21 12:11:02.724184+00');
+INSERT INTO public.users_places (id, user_id, place_id, created_at, updated_at) VALUES (4, 4, 2, '2024-10-21 12:11:05.549375+00', '2024-10-21 12:11:05.549375+00');
+SELECT pg_catalog.setval('public.network_id_seq', 10, true);
+SELECT pg_catalog.setval('public.places_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_id_seq', 5, true);
+SELECT pg_catalog.setval('public.users_places_id_seq', 4, true);

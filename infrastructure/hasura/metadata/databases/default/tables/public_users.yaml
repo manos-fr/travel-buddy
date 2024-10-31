@@ -2,10 +2,31 @@ table:
   name: users
   schema: public
 array_relationships:
-  - name: users_grants
+  - name: network_as_action_user
+    using:
+      foreign_key_constraint_on:
+        column: action_user_id
+        table:
+          name: network
+          schema: public
+  - name: network_as_user_1
+    using:
+      foreign_key_constraint_on:
+        column: user_id_1
+        table:
+          name: network
+          schema: public
+  - name: network_as_user_2
+    using:
+      foreign_key_constraint_on:
+        column: user_id_2
+        table:
+          name: network
+          schema: public
+  - name: users_places
     using:
       foreign_key_constraint_on:
         column: user_id
         table:
-          name: users_grants
+          name: users_places
           schema: public
