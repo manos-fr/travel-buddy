@@ -145,6 +145,10 @@
       },
       "configurations": {},
       "parallelism": true
+    },
+    "sync-deps": {
+      "executor": "@nx/expo:sync-deps",
+      "options": {}
     }
   },
   "implicitDependencies": []
