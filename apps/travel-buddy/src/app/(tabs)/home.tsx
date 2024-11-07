@@ -27,8 +27,12 @@ const Home = () => {
             onPress={handleAvatarPress}
           />
           <TextInput
-            style={tw`flex-1 mx-4 px-4 py-2 bg-gray-300 dark:bg-gray-600 rounded-3xl`}
-            placeholder="Search places..."
+            style={tw`flex-1 justify-center mx-4 px-4 py-2 android:py-1 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white text-base`}
+            placeholder="Search"
+            placeholderTextColor="#a1a1a1"
+            cursorColor="#acacac"
+            clearButtonMode="always"
+            enterKeyHint="search"
           />
         </View>
 

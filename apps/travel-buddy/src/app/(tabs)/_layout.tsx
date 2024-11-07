@@ -20,18 +20,16 @@ export default function TabLayout() {
             web: 90,
           }),
         },
-        tabBarActiveTintColor: tw.color('text-white'),
-        tabBarInactiveTintColor: tw.color('text-white'),
       }}
     >
       <Tabs.Screen
         name="home"
         options={{
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? 'home' : 'home-outline'}
               size={25}
-              color={color}
+              style={tw`text-black dark:text-white`}
             />
           ),
         }}
@@ -39,11 +37,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="map"
         options={{
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? 'map' : 'map-outline'}
               size={25}
-              color={color}
+              style={tw`text-black dark:text-white`}
             />
           ),
         }}
@@ -51,11 +49,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="my-places"
         options={{
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? 'bookmark' : 'bookmark-outline'}
               size={25}
-              color={color}
+              style={tw`text-black dark:text-white`}
             />
           ),
         }}
@@ -63,11 +61,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="friends"
         options={{
-          tabBarIcon: ({ focused, color }) => (
+          tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? 'people' : 'people-outline'}
               size={25}
-              color={color}
+              style={tw`text-black dark:text-white`}
             />
           ),
         }}
