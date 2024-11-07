@@ -27,7 +27,7 @@ const Home = () => {
             onPress={handleAvatarPress}
           />
           <TextInput
-            style={tw`flex-1 justify-center mx-4 px-4 py-2 android:py-1 bg-gray-200 dark:bg-[#403f3f] rounded-xl text-black dark:text-white text-[16px]`}
+            style={tw`flex-1 justify-center mx-4 px-4 py-2 android:py-1 bg-gray-200 dark:bg-gray-700 rounded-xl text-black dark:text-white text-base`}
             placeholder="Search"
             placeholderTextColor="#a1a1a1"
             cursorColor="#acacac"
