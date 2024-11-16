@@ -19,10 +19,12 @@ export const insertUserPlaceMutation = gql`
     $categories: jsonb!
     $api_id: String!
     $name: String!
+    $country: String!
   ) {
     insert_places_one(
       object: {
         area: $area
+        country: $country
         categories: $categories
         name: $name
         api_id: $api_id
@@ -34,6 +36,7 @@ export const insertUserPlaceMutation = gql`
       on_conflict: { constraint: places_api_id_key, update_columns: [] }
     ) {
       area
+      country
       categories
       id
       name

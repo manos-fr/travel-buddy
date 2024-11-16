@@ -73,6 +73,9 @@ const Home = () => {
       }
       setIsSearching(true);
       try {
+        if (!searchParams?.name) {
+          return;
+        }
         const response = await refetch();
         const placesData = response?.data?.search?.data?.results ?? [];
 
@@ -84,7 +87,7 @@ const Home = () => {
       } finally {
         setIsSearching(false);
       }
-    }, 1500),
+    }, 1000),
     [refetch, searchParams]
   );
 
@@ -107,12 +110,17 @@ const Home = () => {
       const response = await mutateAsync({
         variables: {
           area: place.city || place.country || '',
+          country: place.country || '',
           categories: place.category || [],
           name: place.name,
           api_id: place.place_id,
           user_id: 1, // TODO get the user id from the auth context
         },
       });
+      setSearchParams((prev) => ({
+        ...prev,
+        name: '',
+      }));
     } catch (error) {
       console.log({ error });
     }
@@ -172,6 +180,7 @@ const Home = () => {
             cursorColor="#acacac"
             clearButtonMode="always"
             enterKeyHint="search"
+            value={searchParams.name}
             onChange={handleSearchChange}
           />
         </View>

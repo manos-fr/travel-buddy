@@ -869,6 +869,7 @@ export type Places = {
   api_id: Scalars['String']['output'];
   area: Scalars['String']['output'];
   categories?: Maybe<Scalars['jsonb']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
@@ -965,6 +966,7 @@ export type Places_Bool_Exp = {
   api_id?: InputMaybe<String_Comparison_Exp>;
   area?: InputMaybe<String_Comparison_Exp>;
   categories?: InputMaybe<Jsonb_Comparison_Exp>;
+  country?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -1013,6 +1015,7 @@ export type Places_Insert_Input = {
   api_id?: InputMaybe<Scalars['String']['input']>;
   area?: InputMaybe<Scalars['String']['input']>;
   categories?: InputMaybe<Scalars['jsonb']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1028,6 +1031,7 @@ export type Places_Max_Fields = {
   __typename?: 'places_max_fields';
   api_id?: Maybe<Scalars['String']['output']>;
   area?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -1041,6 +1045,7 @@ export type Places_Min_Fields = {
   __typename?: 'places_min_fields';
   api_id?: Maybe<Scalars['String']['output']>;
   area?: Maybe<Scalars['String']['output']>;
+  country?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -1077,6 +1082,7 @@ export type Places_Order_By = {
   api_id?: InputMaybe<Order_By>;
   area?: InputMaybe<Order_By>;
   categories?: InputMaybe<Order_By>;
+  country?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1107,6 +1113,8 @@ export enum Places_Select_Column {
   /** column name */
   Categories = 'categories',
   /** column name */
+  Country = 'country',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
@@ -1127,6 +1135,7 @@ export type Places_Set_Input = {
   api_id?: InputMaybe<Scalars['String']['input']>;
   area?: InputMaybe<Scalars['String']['input']>;
   categories?: InputMaybe<Scalars['jsonb']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1170,6 +1179,7 @@ export type Places_Stream_Cursor_Value_Input = {
   api_id?: InputMaybe<Scalars['String']['input']>;
   area?: InputMaybe<Scalars['String']['input']>;
   categories?: InputMaybe<Scalars['jsonb']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1194,6 +1204,8 @@ export enum Places_Update_Column {
   Area = 'area',
   /** column name */
   Categories = 'categories',
+  /** column name */
+  Country = 'country',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2376,10 +2388,11 @@ export type InsertUserPlaceMutationMutationVariables = Exact<{
   categories: Scalars['jsonb']['input'];
   api_id: Scalars['String']['input'];
   name: Scalars['String']['input'];
+  country: Scalars['String']['input'];
 }>;
 
 
-export type InsertUserPlaceMutationMutation = { __typename?: 'mutation_root', insert_places_one?: { __typename?: 'places', area: string, categories?: any | null, id: number, name: string, api_id: string, users_places: Array<{ __typename?: 'users_places', place_id: number, user_id: number }> } | null };
+export type InsertUserPlaceMutationMutation = { __typename?: 'mutation_root', insert_places_one?: { __typename?: 'places', area: string, country?: string | null, categories?: any | null, id: number, name: string, api_id: string, users_places: Array<{ __typename?: 'users_places', place_id: number, user_id: number }> } | null };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2432,12 +2445,13 @@ export type GetPlacesLazyQueryHookResult = ReturnType<typeof useGetPlacesLazyQue
 export type GetPlacesSuspenseQueryHookResult = ReturnType<typeof useGetPlacesSuspenseQuery>;
 export type GetPlacesQueryResult = Apollo.QueryResult<GetPlacesQuery, GetPlacesQueryVariables>;
 export const InsertUserPlaceMutationDocument = gql`
-    mutation insertUserPlaceMutation($user_id: Int!, $area: String!, $categories: jsonb!, $api_id: String!, $name: String!) {
+    mutation insertUserPlaceMutation($user_id: Int!, $area: String!, $categories: jsonb!, $api_id: String!, $name: String!, $country: String!) {
   insert_places_one(
-    object: {area: $area, categories: $categories, name: $name, api_id: $api_id, users_places: {data: {user_id: $user_id}, on_conflict: {constraint: users_places_pkey, update_columns: []}}}
+    object: {area: $area, country: $country, categories: $categories, name: $name, api_id: $api_id, users_places: {data: {user_id: $user_id}, on_conflict: {constraint: users_places_pkey, update_columns: []}}}
     on_conflict: {constraint: places_api_id_key, update_columns: []}
   ) {
     area
+    country
     categories
     id
     name
@@ -2469,6 +2483,7 @@ export type InsertUserPlaceMutationMutationFn = Apollo.MutationFunction<InsertUs
  *      categories: // value for 'categories'
  *      api_id: // value for 'api_id'
  *      name: // value for 'name'
+ *      country: // value for 'country'
  *   },
  * });
  */
