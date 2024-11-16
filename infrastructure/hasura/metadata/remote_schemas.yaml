@@ -1,1 +1,7 @@
-[]
+- name: places-api
+  definition:
+    url: '{{HASURA_GRAPHQL_PLACES_API}}'
+    timeout_seconds: 60
+    customization: {}
+    forward_client_headers: true
+  comment: ""

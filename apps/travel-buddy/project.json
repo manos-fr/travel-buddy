@@ -149,6 +149,14 @@
     "sync-deps": {
       "executor": "@nx/expo:sync-deps",
       "options": {}
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["graphql-codegen"],
+        "cwd": "apps/travel-buddy",
+        "parallel": false
+      }
     }
   },
   "implicitDependencies": []
